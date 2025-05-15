@@ -1,7 +1,7 @@
-# <img src="https://github-production-user-asset-6210df.s3.amazonaws.com/160732778/443964861-ef6dd101-908c-4dc5-be8c-03457dd54874.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAVCODYLSA53PQK4ZA%2F20250515%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20250515T061502Z&X-Amz-Expires=300&X-Amz-Signature=aca67f7078422c7c3e2394e3eb4dc561ed70059e5317c0c07d0f01f8332722f6&X-Amz-SignedHeaders=host" alt="SuperDou Logo" width="32" style="vertical-align: middle; margin-right: 8px;">SuperDou
+# <img src="https://github.com/user-attachments/assets/7e3c176f-2ef7-4183-ac48-b9b4ed84c341" alt="SuperDou Logo" width="32" style="vertical-align: middle; margin-right: 8px;">SuperDou
 
 <div align="center" style="background-color: #2c3e50; border-radius: 12px; padding: 20px; margin-bottom: 16px; color: white;"> 
-  <img src="https://github-production-user-asset-6210df.s3.amazonaws.com/160732778/443971325-2f367d30-1b35-4dc2-86ce-fb112e48bb78.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAVCODYLSA53PQK4ZA%2F20250515%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20250515T061658Z&X-Amz-Expires=300&X-Amz-Signature=bc9662bec0c3f6fac75fb4730a8d6c663b4692f5057400eae39c427a64972fa7&X-Amz-SignedHeaders=host" alt="SuperDou Text Logo" width="200" style="vertical-align: middle;">
+  <img src="https://github.com/user-attachments/assets/5e919de7-d33b-4b3c-8047-b83fd2a91602" alt="SuperDou Text Logo" width="200" style="vertical-align: middle;">
   <div style="color: #f0f0f0; font-size: 0.95em; line-height: 1.7; font-weight: 400; letter-spacing: 0.3px; padding: 0 8px; margin-top: 12px;">
     Make Doubao your AI creation partner<br>
     Make content creation more efficient, easier, and fun!
