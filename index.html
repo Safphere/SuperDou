@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SuperDou</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        function switchLanguage(lang) {
+            localStorage.setItem('preferredLanguage', lang);
+            
+            document.getElementById('en-link').style.fontWeight = (lang === 'en') ? '700' : '500';
+            document.getElementById('zh-link').style.fontWeight = (lang === 'zh') ? '700' : '500';
+            
+            const elements = document.querySelectorAll('[data-lang]');
+            elements.forEach(el => {
+                if (el.getAttribute('data-lang') === lang) {
+                    el.style.display = 'block';
+                } else {
+                    el.style.display = 'none';
+                }
+            });
+            
+            document.documentElement.lang = lang;
+        }
+        
+        window.onload = function() {
+            const lang = localStorage.getItem('preferredLanguage') || 'en';
+            switchLanguage(lang);
+        };
+    </script>
+</head>
+
+<body>
+    <style>
+        :root {
+            --primary-color: #4F46E5;
+            --primary-hover: #4338CA;
+            --secondary-color: #06B6D4;
+            --dark-bg: #111827;
+            --card-bg: #1F2937;
+            --text-primary: #F9FAFB;
+            --text-secondary: #D1D5DB;
+            --accent-gradient: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+        }
+        
+        body {
+            display: flex;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: var(--dark-bg);
+            background-image: 
+                radial-gradient(circle at 25% 25%, rgba(79, 70, 229, 0.1) 0%, transparent 60%),
+                radial-gradient(circle at 75% 75%, rgba(6, 182, 212, 0.1) 0%, transparent 60%);
+            padding: 40px 20px;
+            box-sizing: border-box;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            color: var(--text-primary);
+        }
+        
+        .content {
+            max-width: 900px;
+            width: 100%;
+            padding: 30px;
+            box-shadow: 0 6px 24px rgba(0, 0, 0, 0.15);
+            background-color: var(--card-bg);
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(10px);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .content:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 32px rgba(0, 0, 0, 0.2);
+        }
+        
+        h2 {
+            text-align: center;
+            color: var(--text-primary);
+            margin-top: 40px;
+            margin-bottom: 25px;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 12px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            position: relative;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 2px;
+            background: var(--accent-gradient);
+        }
+        
+        p, ul, ol {
+            text-align: left;
+            line-height: 1.8;
+            color: var(--text-secondary);
+            font-weight: 400;
+        }
+        
+        ul li, ol li {
+            margin: 12px 0;
+            position: relative;
+        }
+        
+        a {
+            color: var(--secondary-color);
+            text-decoration: none;
+            transition: all 0.2s ease;
+            position: relative;
+            font-weight: 500;
+        }
+        
+        a:hover {
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+        
+        a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 1px;
+            bottom: -2px;
+            left: 0;
+            background: var(--accent-gradient);
+            transition: width 0.3s ease;
+        }
+        
+        a:hover::after {
+            width: 100%;
+        }
+        
+        .header-banner {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 30px;
+            margin-bottom: 35px;
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+        }
+        
+        .header-banner::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--accent-gradient);
+            opacity: 0.1;
+            z-index: 0;
+        }
+        
+        .header-banner > * {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .language-selector {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 30px;
+            display: inline-block;
+            position: relative;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .features-table {
+            margin: 30px auto;
+            width: 100%;
+            max-width: 700px;
+        }
+        
+        .features-table table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 15px;
+        }
+        
+        .features-table td {
+            padding: 25px 20px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+            backdrop-filter: blur(5px);
+        }
+        
+        .features-table td:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.12);
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(255, 255, 255, 0.1);
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 20px 15px;
+            }
+            .content {
+                padding: 20px;
+            }
+            .features-table td {
+                padding: 15px;
+            }
+            .features-table table {
+                border-spacing: 8px;
+            }
+            .privacy-btn {
+                padding: 8px 16px;
+                font-size: 0.9em;
+                width: 100%;
+                max-width: 200px;
+                margin: 8px auto;
+                display: block;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .privacy-btn {
+                max-width: 180px;
+                padding: 7px 14px;
+                font-size: 0.85em;
+            }
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 60px;
+            color: var(--text-secondary);
+            font-size: 0.9em;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        /* 添加科技感动画效果 */
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(79, 70, 229, 0.4); }
+            70% { box-shadow: 0 0 0 10px rgba(79, 70, 229, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(79, 70, 229, 0); }
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background: var(--accent-gradient);
+            color: white;
+            border-radius: 30px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            margin: 10px 5px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 3px 12px rgba(79, 70, 229, 0.25);
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 18px rgba(79, 70, 229, 0.35);
+        }
+        
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: 0.5s;
+        }
+        
+        .btn:hover::before {
+            left: 100%;
+        }
+        
+        .privacy-btn-container {
+            text-align: center;
+            margin: 30px 0;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .privacy-btn {
+            min-width: 120px;
+            text-align: center;
+            box-sizing: border-box;
+            transition: all 0.3s ease;
+        }
+    </style>
+    <div class="content">
+        <div class="header-banner">
+            <img src="https://github.com/user-attachments/assets/5e919de7-d33b-4b3c-8047-b83fd2a91602"
+                alt="SuperDou Text Logo" width="220" style="vertical-align: middle; filter: drop-shadow(0 0 10px rgba(79, 70, 229, 0.5));">
+            <div data-lang="zh" style="color: var(--text-primary); font-size: 1.05em; line-height: 1.7; font-weight: 400; letter-spacing: 0.5px; padding: 0 8px; margin-top: 18px;">
+                让豆包成为 <span style="background: var(--accent-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: 600;">AI 创作搭档</span><br>
+                内容创作更<span style="color: var(--secondary-color);">高效</span>、<span style="color: var(--primary-color);">轻松</span>、<span style="color: var(--secondary-color);">快乐</span>！
+            </div>
+            <div data-lang="en" style="color: var(--text-primary); font-size: 1.05em; line-height: 1.7; font-weight: 400; letter-spacing: 0.5px; padding: 0 8px; margin-top: 18px; display: none;">
+                Make Doubao your <span style="background: var(--accent-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: 600;">AI Creative Partner</span><br>
+                Content creation becomes more <span style="color: var(--secondary-color);">efficient</span>, <span style="color: var(--primary-color);">easy</span>, and <span style="color: var(--secondary-color);">enjoyable</span>!
+            </div>
+        </div>
+        <div class="language-selector">
+            <a href="#" onclick="switchLanguage('en'); return false;" style="margin: 0 10px;" id="en-link">English</a> | <a href="#" onclick="switchLanguage('zh'); return false;" style="margin: 0 10px;" id="zh-link">简体中文</a><br>
+            <div style="margin-top: 15px;">
+                <a href="https://chrome.google.com/webstore" style="margin: 0 5px;"><img
+                        src="https://img.shields.io/chrome-web-store/v/0.0.2?color=4F46E5&label=Chrome%20Web%20Store&style=for-the-badge"
+                        alt="Chrome Web Store" height="22"></a>
+                <a href="https://microsoftedge.microsoft.com/addons" style="margin: 0 5px;"><img
+                        src="https://img.shields.io/badge/Edge%20Add--ons-v0.0.2-4F46E5?style=for-the-badge" 
+                        alt="Edge Add-ons" height="22"></a>
+            </div>
+        </div>
+        <h2 data-lang="zh">✨ 简介</h2>
+        <h2 data-lang="en" style="display: none;">✨ Introduction</h2>
+        <p data-lang="zh">SuperDou 是一款专为内容创作者打造的浏览器扩展，让 AI 生成网页的内容导出变得简单高效。只需一键，即可将图文内容智能转换为标准 Markdown 格式。</p>
+        <p data-lang="en" style="display: none;">SuperDou is a browser extension designed for content creators, making it simple and efficient to export AI-generated web content. With just one click, you can intelligently convert text and images to standard Markdown format.</p>
+        <h2 data-lang="zh">🚀 主要功能</h2>
+        <h2 data-lang="en" style="display: none;">🚀 Key Features</h2>
+        <div class="features-table">
+            <table>
+                <tr>
+                    <td align="center">
+                        <div data-lang="zh" style="font-size: 1.2em; font-weight: 600; margin-bottom: 10px; color: var(--text-primary);">一键提取</div>
+                        <div data-lang="en" style="font-size: 1.2em; font-weight: 600; margin-bottom: 10px; color: var(--text-primary); display: none;">One-Click Extract</div>
+                        <div style="font-size: 2em; margin: 15px 0; background: var(--accent-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">✨</div>
+                        <div data-lang="zh" style="color: var(--text-secondary);">轻松获取内容</div>
+                        <div data-lang="en" style="color: var(--text-secondary); display: none;">Easy Content Capture</div>
+                    </td>
+                    <td align="center">
+                        <div style="font-size: 1.2em; font-weight: 600; margin-bottom: 10px; color: var(--text-primary);">Markdown</div>
+                        <div style="font-size: 2em; margin: 15px 0; background: var(--accent-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">📝</div>
+                        <div data-lang="zh" style="color: var(--text-secondary);">整洁格式输出</div>
+                        <div data-lang="en" style="color: var(--text-secondary); display: none;">Clean Format Output</div>
+                    </td>
+                    <td align="center">
+                        <div data-lang="zh" style="font-size: 1.2em; font-weight: 600; margin-bottom: 10px; color: var(--text-primary);">批量操作</div>
+                        <div data-lang="en" style="font-size: 1.2em; font-weight: 600; margin-bottom: 10px; color: var(--text-primary); display: none;">Batch Operations</div>
+                        <div style="font-size: 2em; margin: 15px 0; background: var(--accent-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">🔄</div>
+                        <div data-lang="zh" style="color: var(--text-secondary);">快速批量处理</div>
+                        <div data-lang="en" style="color: var(--text-secondary); display: none;">Fast Batch Processing</div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <h2 data-lang="zh">🎯 快速开始</h2>
+        <h2 data-lang="en" style="display: none;">🎯 Quick Start</h2>
+        <ol data-lang="zh">
+            <li>从 <a href="https://chrome.google.com/webstore">Chrome 网上应用店</a> 或 <a
+                    href="https://microsoftedge.microsoft.com/addons">Microsoft Edge 插件商店</a> 安装</li>
+            <li>浏览时点击 SuperDou 按钮</li>
+            <li>选择内容并转换为 Markdown</li>
+        </ol>
+        <ol data-lang="en" style="display: none;">
+            <li>Install from <a href="https://chrome.google.com/webstore">Chrome Web Store</a> or <a
+                    href="https://microsoftedge.microsoft.com/addons">Microsoft Edge Add-ons</a></li>
+            <li>Click the SuperDou button while browsing</li>
+            <li>Select content and convert to Markdown</li>
+        </ol>
+        <h2 data-lang="zh">🔒 隐私保护</h2>
+        <h2 data-lang="en" style="display: none;">🔒 Privacy Protection</h2>
+        <ul data-lang="zh">
+            <li>所有数据处理均在本地完成</li>
+            <li>不收集任何用户数据</li>
+            <li>不向服务器发送信息</li>
+            <li>不存储用户信息</li>
+        </ul>
+        <ul data-lang="en" style="display: none;">
+            <li>All data processing is done locally</li>
+            <li>No user data collection</li>
+            <li>No information sent to servers</li>
+            <li>No user information storage</li>
+        </ul>
+        <div class="privacy-btn-container">
+            <a href="./docs/zn/privacy-policy.md" class="btn privacy-btn" data-lang="zh">隐私政策</a>
+            <a href="./docs/en/privacy-policy.md" class="btn privacy-btn" data-lang="en" style="display: none;">Privacy Policy</a>
+        </div>
+        <h2 data-lang="zh">🤝 社区参与</h2>
+        <h2 data-lang="en" style="display: none;">🤝 Community Participation</h2>
+        <ul data-lang="zh">
+            <li><a href="https://github.com/safphere/superdou/issues">问题反馈</a></li>
+            <li><a href="https://github.com/safphere/superdou/issues">功能建议</a></li>
+        </ul>
+        <ul data-lang="en" style="display: none;">
+            <li><a href="https://github.com/safphere/superdou/issues">Issue Feedback</a></li>
+            <li><a href="https://github.com/safphere/superdou/issues">Feature Suggestions</a></li>
+        </ul>
+        <div class="footer" data-lang="zh">
+            © 2024 Safphere 社区. 保留所有权利。
+        </div>
+        <div class="footer" data-lang="en" style="display: none;">
+            © 2024 Safphere Community. All rights reserved.
+        </div>
+    </div>
+</body>
+
+</html>
